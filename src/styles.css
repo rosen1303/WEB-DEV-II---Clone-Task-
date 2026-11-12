@@ -1,0 +1,277 @@
+/* Set the base font, brand colours and reusable spacing values.
+   Larger spacing will increases at the tablet and desktop resolutions. */
+:root {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  color: #070410;
+  background: #231651;
+  --small: 16px;
+  --large: 16px;
+  --accent: #eef36a;
+}
+/* Include padding and borders in element widths for predictable sizing for multiple devices. */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 4px;
+}
+/* Highlight links, buttons and inputs when navigating with the keyboard "TAB" key. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #4dccbd;
+  outline-offset: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  background: white;
+  padding: 16px;
+  z-index: 5;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+/* Arrange the logo, navigation and search button using Flexbox. */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--small);
+  padding: var(--small);
+  background: white;
+  box-shadow: 0 8px 0 #070410;
+}
+/* Use Teko for headings and buttons; other text have Lato. */
+h1,
+h2,
+button {
+  font-family: 'Teko', sans-serif;
+  font-weight: 400;
+}
+
+.brand {
+  margin: 0;
+  font-size: 2em;
+  line-height: 1;
+}
+
+.brand a {
+  text-decoration: none;
+}
+/* Hide genre navigation on mobile; show it from 720px upwards. */
+.genres {
+  display: none;
+}
+
+.genres a {
+  text-decoration: none;
+}
+
+.genres a:hover {
+  text-decoration: underline;
+}
+/* Apply shared button colours, spacing, rounded corners and text sizes. */
+button {
+  padding: var(--small);
+  border: 2px solid #070410;
+  border-radius: var(--small);
+  background: var(--accent);
+  color: #070410;
+  font-size: 2em;
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #4dccbd;
+}
+/* Start with one column and centre the collection. 900px limit.
+   Leaving responsive spacing around and between the cards. */
+.movie-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--large);
+  max-width: 900px;
+  margin: var(--large) auto;
+  width: calc(100% - 2 * var(--large));
+}
+
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: white;
+  font-size: 1.5em;
+  box-shadow: 8px 8px 0 #070410;
+  scroll-margin-top: 16px;
+}
+/* Fill a square image area without stretching the actual image/artwork. */
+.movie-art {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.movie-copy {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: var(--small);
+  padding: var(--small);
+}
+
+.movie-copy p {
+  margin: 0;
+  line-height: 1.4;
+}
+/* Push the full-width button to the bottom of the card content. */
+.watch-button {
+  width: 100%;
+  margin-top: auto;
+}
+
+/* At 720px, show the genre links and arrange equal-height cards in two columns. */
+@media (min-width: 720px) {
+  :root {
+    --large: 32px;
+  }
+
+  .brand {
+    font-size: 3em;
+  }
+
+  .genres {
+    display: flex;
+    align-items: center;
+    gap: var(--large);
+  }
+
+  .movie-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: calc(100% - 2 * var(--large));
+  }
+}
+
+/* Desktop: a full-width lead card, two vertical cards, then three horizontal cards. */
+@media (min-width: 1024px) {
+  :root {
+    --large: 48px;
+  }
+
+  .movie-card--1 {
+    grid-column: 1 / -1;
+  }
+
+  .movie-card--1 .movie-art {
+    aspect-ratio: 3 / 1;
+  }
+
+  .movie-card--1 .movie-copy {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-items: stretch;
+  }
+
+  .movie-card--1 .watch-button {
+    margin: 0;
+  }
+
+  .movie-card:nth-child(n + 4) {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .movie-card:nth-child(n + 4) .movie-art {
+    height: 100%;
+    min-height: 450px;
+  }
+}
+
+dialog {
+  width: min(560px, calc(100% - 32px));
+  max-height: 85vh;
+  overflow: auto;
+  border: 2px solid #070410;
+  padding: 32px;
+  background: white;
+}
+
+dialog::backdrop {
+  background: rgb(7 4 16 / 80%);
+}
+
+dialog h2 {
+  font-size: 2.5rem;
+  line-height: 1.1;
+  margin: 0 0 16px;
+}
+
+dialog p {
+  line-height: 1.5;
+}
+
+dialog label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+dialog input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #231651;
+}
+
+.search-results {
+  padding-left: 20px;
+  line-height: 2;
+}
+
+.movie-title {
+  margin: 0;
+  font-size: 1.5em;
+  line-height: 1.1;
+}
+
+/* This will Keep the title and description to the left, with the button on the right for the first movie card.*/
+@media (min-width: 1024px) {
+  .movie-card--1 .movie-title {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .movie-card--1 .movie-copy p {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .movie-card--1 .watch-button {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    align-self: stretch;
+  }
+}
+/* Stack the featured button's words on desktop to match the wireframe thats on the first movie Roger Rabit. */
+@media (min-width: 1024px) {
+  .movie-card--1 .watch-button .watch-word {
+    display: block;
+  }
+}
