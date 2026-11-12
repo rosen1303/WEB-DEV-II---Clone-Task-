@@ -1,0 +1,334 @@
+/* Default font by requirments, colours and shared desktop spacing */
+:root {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 16px;
+  color: #14181d;
+  background: #e9e9e9;
+  --spacing: 50px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 5px;
+}
+/* Show a visible outline when navigating links with the keyboard "TAB" key */
+a:focus-visible {
+  outline: 3px solid #786039;
+  outline-offset: 6px;
+}
+/* Hide the skip link until it receives keyboard focus */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 20px;
+  padding: 16px;
+  background: white;
+  z-index: 2;
+}
+
+.skip-link:focus {
+  top: 20px;
+}
+/* Centre the main containers and limit their widh */
+.site-header,
+.page-content,
+.footer-inner {
+  width: min(1160px, calc(100% - 100px));
+  margin-inline: auto;
+}
+
+.site-header {
+  padding-top: var(--spacing);
+}
+
+.logo-link {
+  display: block;
+  width: 200px;
+  margin: 0 auto var(--spacing);
+}
+
+.logo {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+	/* Arrange navigation links using Flexbox */
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: var(--spacing);
+}
+
+.navigation a {
+  text-decoration: none;
+  padding-block: 8px;
+}
+
+.navigation a:hover {
+  text-decoration: underline;
+}
+
+.site-header .navigation {
+  margin-bottom: var(--spacing);
+}
+
+.page-content {
+  background: white;
+}
+/* Apply the heading font and shared typography */
+h1,
+h2 {
+  font-family: 'Protest Guerrilla', sans-serif;
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+h2 {
+  font-size: 3rem;
+  margin: 0 0 24px;
+}
+
+p {
+  line-height: 1.5;
+  margin: 0 0 24px;
+}
+
+.article-copy {
+  padding: var(--spacing);
+}
+
+h1 {
+  margin: 0 0 30px;
+}
+/* Scale the main title with the viewport, within minimum/maximum sizes */
+.title-main {
+  display: block;
+  font-size: clamp(4rem, 8.4vw, 8rem);
+  line-height: .98;
+}
+
+.title-subtitle {
+  display: block;
+  font-size: 3rem;
+  margin-top: 10px;
+}
+/* Make the introduction larger than ordinary paragraphs */
+.introduction {
+  font-size: 1.5rem;
+  max-width: 790px;
+  margin-bottom: 35px;
+}
+
+/* CSS multicolumn layout allows the article to flow down each of the columns. */
+.article-columns {
+  column-count: 3;
+  column-gap: var(--spacing);
+}
+
+.article-columns h2 {
+  break-after: avoid;
+}
+
+.article-columns p {
+  orphans: 3;
+  widows: 3;
+}
+
+.article-columns section+section h2 {
+  margin-top: 30px;
+}
+/* Use a four-column grid for the desktop album layout */
+.album-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.album-gallery img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+/* Make the featured cover span two columns and two rows */
+.album-featured {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+/* Arrange the author biography, portrait and icons using Flexbox */
+.author {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing);
+  padding: var(--spacing);
+}
+
+.author-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.author-copy h2 {
+  text-align: center;
+}
+
+.author-copy p {
+  margin-bottom: 0;
+}
+/* Keep the portrait circular and prevent Flexbox from shrinking it */
+.author-photo {
+  width: 200px;
+  height: 200px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.social-links--vertical {
+  flex-direction: column;
+}
+
+.social-links img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.social-links a {
+  display: block;
+}
+
+.social-links a:hover {
+  opacity: .7;
+}
+
+.comments {
+  padding: var(--spacing);
+  background: #e9e9e9;
+  border-top: 1px solid #c8c8c8;
+}
+
+.comment {
+  max-width: 650px;
+  margin-top: 35px;
+}
+
+.comment h3 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1rem;
+  margin: 0 0 8px;
+}
+
+.comment p {
+  margin: 0;
+}
+
+.site-footer {
+  background: #14181d;
+  color: white;
+  padding-block: var(--spacing);
+}
+
+.footer-inner {
+  display: grid;
+  gap: var(--spacing);
+  text-align: center;
+}
+
+.footer-inner p {
+  margin: 0;
+}
+/* Use two text columns and wrap the author layout on narrower screens */
+@media (max-width: 1000px) {
+  .article-columns {
+    column-count: 2;
+  }
+
+  .author {
+    flex-wrap: wrap;
+  }
+
+  .author-copy {
+    flex-basis: calc(100% - 250px);
+  }
+
+  .author .social-links {
+    width: 100%;
+    flex-direction: row;
+  }
+}
+/* Use one text column and stack author content on phone screens */
+@media (max-width: 650px) {
+  :root {
+    --spacing: 25px;
+  }
+
+  .site-header,
+  .page-content,
+  .footer-inner {
+    width: calc(100% - 32px);
+  }
+
+  .navigation {
+    gap: 16px;
+    font-size: .9rem;
+  }
+
+  .article-columns {
+    column-count: 1;
+  }
+
+  .title-main {
+    font-size: clamp(2.7rem, 12vw, 4.5rem);
+  }
+
+  .title-subtitle {
+    font-size: 2.2rem;
+  }
+
+  h2 {
+    font-size: 3rem;
+  }
+
+  .introduction {
+    font-size: 1.2rem;
+  }
+
+  .album-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .author {
+    flex-direction: column;
+  }
+
+  .author-copy {
+    flex-basis: auto;
+  }
+}
+
+/* that Makes the last social icon (X) white in the footer. as it wasnt visible  */
+.site-footer .social-links li:last-child img {
+  filter: brightness(0) invert(1);
+}
